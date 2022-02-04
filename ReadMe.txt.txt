@@ -1,12 +1,8 @@
-npm run serve
+For local testing:
+>npm install
+>npm run serve
 
+For production testing:
+>npm run build
+then copy the dist folder to ubuntu machine and point it in nginx conf:
 
-
----------------------------- SOME OTHER USERFULL COMMANDS --------------------------------
-
-npm run build
-
-> then copy the dist folder contents to a location on server and then update the nginx configuration:
-
-
-gunicorn --workers=2 --bind=0.0.0.0:8000 hello.wsgi:application
