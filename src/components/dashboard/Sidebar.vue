@@ -2,7 +2,7 @@
   <div class="sidebar">
     <router-link class="brand-logo" to="/index">
       <img src="../../assets/images/logo.png" alt="" />
-      <span>Vaneck Crypto Dashboard </span></router-link
+      <span>Ivan-Stake Dashboard </span></router-link
     >
     <div class="menu">
       <ul>
@@ -42,6 +42,12 @@
             <span class="nav-text">Crypto Currency News</span>
           </router-link>
         </li>
+        <li :class="active === 7 && 'active'">
+          <router-link to="/Validator" :class="active === 7 && 'active'">
+            <span><i class="mdi mdi-account"></i></span>
+            <span class="nav-text">Validator</span>
+          </router-link>
+        </li>
         <!--
         <li :class="active === 4 && 'active'">
           <router-link to="settings" :class="active === 4 && 'active'">
@@ -59,7 +65,7 @@
         <a to="#"><i class="fa fa-twitter"></i></a>
         <a to="#"><i class="fa fa-facebook"></i></a>
       </div>
-      <div class="copy_right">© {{ new Date().getFullYear() }} Vaneck Associates</div> -->
+      <div class="copy_right">© {{ new Date().getFullYear() }} Ivan-Stake</div> -->
     </div>
   </div>
 </template>
