@@ -33,6 +33,7 @@ import TradingCharts from "../views/TradingCharts";
 import PubSub from "../views/PubSub";
 import APIIntegration from "../views/APIIntegration";
 import Validator from "../views/Validator";
+import Delegator from "../views/Delegator";
 import News from "../views/News";
 
 Vue.use(VueRouter);
@@ -43,11 +44,11 @@ const routes = [
     name: "Demo",
     component: Demo,
   },
-  {
-    path: "/index",
-    name: "Index",
-    component: Index,
-  },
+  // {
+  //   path: "/index",
+  //   name: "Index",
+  //   component: Index,
+  // },
   {
     path: "/HistoricalCharts",
     name: "HistoricalCharts",
@@ -72,6 +73,11 @@ const routes = [
     path: "/Validator",
     name: "Validator",
     component: Validator,
+  },
+  {
+    path: "/Delegator",
+    name: "Delegator",
+    component: Delegator,
   },
   {
     path: "/News",
