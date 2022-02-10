@@ -7,12 +7,31 @@
     <div class="menu">
       <ul>
         <li :class="active === 1 && 'active'">
-          <router-link to="/index" :class="active === 1 && 'active'">
-            <span><i class="mdi mdi-view-dashboard"></i></span>
+          <router-link to="/vuehome" :class="active === 1 && 'active'">
+            <span><i class="mdi mdi-account"></i></span>
             <span class="nav-text">Home</span>
           </router-link>
         </li>
-         <li :class="active === 2 && 'active'">
+        <li :class="active === 2 && 'active'">
+          <router-link to="/Validator" :class="active === 2 && 'active'">
+            <span><i class="mdi mdi-account"></i></span>
+            <span class="nav-text">Validator</span>
+          </router-link>
+        </li>
+        <!-- <li :class="active === 2 && 'active'">
+          <router-link to="/Delegator" :class="active === 2 && 'active'">
+            <span><i class="mdi mdi-view-dashboard"></i></span>
+            <span class="nav-text">Delegator</span>
+          </router-link>
+        </li> -->
+        <li :class="active === 3 && 'active'">
+          <router-link to="/News" :class="active === 3 && 'active'">
+            <span><i class="mdi mdi-account"></i></span>
+            <span class="nav-text">News</span>
+          </router-link>
+        </li>
+        
+         <!-- <li :class="active === 2 && 'active'">
           <router-link to="/HistoricalCharts" :class="active === 2 && 'active'">
             <span><i class="mdi mdi-repeat"></i></span>
             <span class="nav-text">Historical Charts</span>
@@ -35,19 +54,9 @@
             <span><i class="mdi mdi-account"></i></span>
             <span class="nav-text">API Integration</span>
           </router-link>
-        </li>
-        <li :class="active === 6 && 'active'">
-          <router-link to="/News" :class="active === 6 && 'active'">
-            <span><i class="mdi mdi-account"></i></span>
-            <span class="nav-text">Crypto Currency News</span>
-          </router-link>
-        </li>
-        <li :class="active === 7 && 'active'">
-          <router-link to="/Validator" :class="active === 7 && 'active'">
-            <span><i class="mdi mdi-account"></i></span>
-            <span class="nav-text">Validator</span>
-          </router-link>
-        </li>
+        </li> -->
+        
+        
         <!--
         <li :class="active === 4 && 'active'">
           <router-link to="settings" :class="active === 4 && 'active'">
