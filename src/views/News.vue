@@ -1,5 +1,5 @@
 <template>
-<layout :active="6" :title="true">
+<layout :active="3" :title="true">
     <div class="content-body">
          <div>
            <section class="section">
@@ -11,7 +11,7 @@
                         <div class="media">
                         <div class="media-left">
                             <figure class="image is-128x128">
-                            <img  v-bind:src="item.imageurl" alt="" style="width:60px;height=60px;">
+                            <img  v-bind:src="item.imageurl" alt="" style="width:80px;height=80px;">
                             </figure>
                             <bold>
                             <a class="title is-link" v-bind:href="item.guid" target="_blank">{{item.title}}</a>
@@ -65,7 +65,7 @@ created () {
   color:#3273dc;
  }
  section.section{
-  width: 70%;
+  width: 95%;
 }
 section.section{
    margin: auto; 
