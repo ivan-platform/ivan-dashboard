@@ -169,7 +169,7 @@ const routes = [
     component: Settings,
   },
   {
-    path: "/",
+    path: "/vuehome",
     name: "Index",
     component: Index,
   },
