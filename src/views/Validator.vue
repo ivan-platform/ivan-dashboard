@@ -97,7 +97,7 @@
                       <span style='font-size:1.2em'>avalanche/1.7.4</span>
                       <div class="hr"><hr></div>
                       <span style="padding-right:30px;">IP</span>
-                      <span style='font-size:1.2em'>3.143.14.77</span>
+                      <span style='font-size:1.2em'>3.132.31.18</span>
                     </h5>
                   </div>
                 </div>
