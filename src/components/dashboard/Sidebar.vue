@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <router-link class="brand-logo" to="/index">
+    <router-link class="brand-logo" to="/vuehome">
       <img src="../../assets/images/logo.png" alt="" />
       <span>Ivan-Stake Dashboard </span></router-link
     >
