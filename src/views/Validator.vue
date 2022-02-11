@@ -20,7 +20,7 @@
                     <h3>NAME</h3>
                   </div>
                   <div class="widget-info">
-                    <h5>IVAN-STAKE</h5>
+                    <h5>IVAN-STAKE </h5>
                     </div>
                 </div>
               </div>
