@@ -200,7 +200,7 @@
                       <span style='font-size:1.2em'>{{delegationsMaxYield.toFixed(6)}} %</span>
                       <div class="hr"><hr></div>
                       <span style="padding-right:30px;">DELEGATION FEES</span>
-                      <span style='font-size:1.2em'>{{this.delegationFee}} %</span>
+                      <span style='font-size:1.2em'>{{delegationsFee}} %</span>
                       <div class="hr"><hr></div>
                       <span style="padding-right:30px;">GROSS REWARDS</span>
                       <span style='font-size:1.2em'>{{delegationsGrossReward}}  
