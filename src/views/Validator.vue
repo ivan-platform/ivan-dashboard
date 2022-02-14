@@ -401,7 +401,7 @@ export default {
   data() {
     return {
       ivanapi_post_data: [],
-        fields: ['txID',{'stakeAmount':'Delegated'}, 'potentialReward' ,{'startTime':'Started On'},{'endTime': 'Ends On'}],
+        fields: ['txID',{'stakeAmount':'Delegated'}, 'potentialReward' ,{'startTime':'Started On'},{'endTime': 'Ends On'}, {'timeLeftDays': 'Days Left'}],
         tableData: [],
         totalRows: 100,
         currentPage: 1,
@@ -591,15 +591,16 @@ export default {
       this.cryptoSymbol = "AVAX";
       this.startTime = this.getDate(this.ivanapi_post_data.result.validators[0].startTime);
       this.endTime = this.getDate(this.ivanapi_post_data.result.validators[0].endTime);
-      this.leftTimeDays = this.mydiff(this.startTime,this.endTime,"days");
+      //this.leftTimeDays = this.mydiff(this.startTime,this.endTime,"days");
+      this.leftTimeDays = this.dateDifference(this.endTime);
 
       for (var i=0; i< this.tableData.length; i++){
         this.tableData[i].stakeAmount = this.tableData[i].stakeAmount / 1000000000 ;//+ " " + this.cryptoSymbol;
         this.tableData[i].potentialReward = this.tableData[i].potentialReward / 1000000000 ;//+ " " + this.cryptoSymbol;
         // this.tableData[i].timeLeft = -1 *this.mydiff(parseInt(this.tableData[i].startTime) , parseInt(this.tableData[i].endTime),"days")/52.25;
-        //this.tableData[i].timeLeftDays = this.mydiff(+this.tableData[i].startTime , +this.tableData[i].endTime,"days");
         this.tableData[i].startTime = this.getDate(this.tableData[i].startTime) ;
         this.tableData[i].endTime = this.getDate(this.tableData[i].endTime) ;
+        this.tableData[i].timeLeftDays = this.dateDifference(this.tableData[i].endTime);
         
           }
 
