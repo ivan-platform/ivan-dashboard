@@ -97,7 +97,7 @@
                       <span style='font-size:1.2em'>avalanche/1.7.4</span>
                       <div class="hr"><hr></div>
                       <span style="padding-right:30px;">IP</span>
-                      <span style='font-size:1.2em'>3.132.31.18</span>
+                      <span style='font-size:1.2em'>18.190.173.22</span>
                     </h5>
                   </div>
                 </div>
@@ -489,8 +489,8 @@ export default {
         case "seconds": return Math.floor(timediff / second);
         default: return undefined;
     }
-},
-setDelegator(record, index){
+    },
+    setDelegator(record, index){
     var delegatoridx = index;
     this.delegatorDelegatedNode = this.tableData[delegatoridx].nodeID;
     this.delegatorBeneficiary = this.tableData[delegatoridx].rewardOwner.addresses[0];
@@ -504,9 +504,8 @@ setDelegator(record, index){
     this.delegatorNetYield = this.delegatorNetRewards/this.delegatorStakeDelegated * 100;
     
 
-},
-
-getIvanAPIPostData() {
+    },
+    getIvanAPIPostData() {
       const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -514,13 +513,13 @@ getIvanAPIPostData() {
               "jsonrpc": "2.0",
               "method": "platform.getCurrentValidators",
               "params": {
-                  "nodeIDs": ["NodeID-2K5AqZwp8LvRNnVWWB2VY7VkxVZbt9K69"]
+                  "nodeIDs": ["NodeID-HKLp5269LH8DcrLvHPc2PHjGczBQD3td4"]
               },
               "id": 1
           })
         };
       
-    fetch('http://ec2-3-132-31-18.us-east-2.compute.amazonaws.com:9650/ext/P', requestOptions)
+    fetch('http://ec2-18-190-173-22.us-east-2.compute.amazonaws.com:9650/ext/P', requestOptions)
     .then(async response => {
       const data = await response.json();
 
@@ -531,20 +530,15 @@ getIvanAPIPostData() {
         return Promise.reject(error);
       }
       
-      console.log("1--------")
-      console.log(data.result);
-      console.log("2------------")
+      // console.log(data.result);
       // console.log(JSON.parse(data).result);
-      console.log("3--------")
       this.ivanapi_post_data = data;
-      console.log(this.ivanapi_post_data.result.validators[0].delegators)
-      console.log("4--------")
+      // console.log(this.ivanapi_post_data.result.validators[0].delegators)
       this.tableData = this.ivanapi_post_data.result.validators[0].delegators;
-      console.log(this.tableData)
-      console.log("5--------")
+
+      // console.log(this.tableData)
       this.ivanStatus = this.getStatus(this.ivanapi_post_data.result.validators[0].connected);
-      console.log(this.ivanStatus)
-      console.log("6-------")
+      // console.log(this.ivanStatus)
       this.nodeID = this.ivanapi_post_data.result.validators[0].nodeID
       this.beneficiaryAddress = this.ivanapi_post_data.result.validators[0].rewardOwner.addresses[0]
       this.stakeOwned = this.ivanapi_post_data.result.validators[0].stakeAmount / 1000000000;
@@ -574,6 +568,12 @@ getIvanAPIPostData() {
       this.startTime = this.getDate(this.ivanapi_post_data.result.validators[0].startTime);
       this.endTime = this.getDate(this.ivanapi_post_data.result.validators[0].endTime);
       this.leftTimeDays = this.mydiff(this.startTime,this.endTime,"days");
+      //this.tableData = transformtableData();
+      for (var i=0; i< this.tableData.length; i++){
+        this.tableData[i].stakeAmount = this.tableData[i].stakeAmount / 1000000000;
+        this.tableData[i].potentialReward = this.tableData[i].potentialReward / 1000000000;
+        //this.tableData[i].startTime = getDate(this.tableData[i].startTime) ;
+          }
 
       // Delegators Insight
       this.setDelegator(0,0)
@@ -586,6 +586,9 @@ getIvanAPIPostData() {
                       
                 
     },
+    // emittakeTotal(){
+    // this.$emit("getavalanchetotal", this.avalancheTotal);
+    // },
   },
   // computed, created  , bbforecreated, afterreated, -before created eg. session check beforecreated,
   // destroyed -
