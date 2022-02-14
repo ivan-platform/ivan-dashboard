@@ -243,7 +243,7 @@
 
 
 
-
+        
 
         <span style="color:black;font-size:40px;font-weight:700;">{{NumberOfDelegators}} Delegations</span>
         <br>
@@ -395,12 +395,13 @@
 import Layout from "../components/dashboard/Layout.vue";
 //import axios from "axios";
 import moment from 'moment';
+
 export default {
   components: { Layout },
   data() {
     return {
       ivanapi_post_data: [],
-        fields: ['txID','startTime','endTime','stakeAmount','nodeID',{'rewardOwner.addresses[0]':'Address'},'potentialReward'],
+        fields: ['txID',{'stakeAmount':'Delegated'}, 'potentialReward' ,{'startTime':'Started On'},{'endTime': 'Ends On'}],
         tableData: [],
         totalRows: 100,
         currentPage: 1,
@@ -414,7 +415,6 @@ export default {
         // BENEFICIARY
         beneficiaryAddress : NaN,
         // TIME LEFT
-        timeLeft : NaN,
         leftTimeDays : NaN,
         // STAKE
         stakeOwned : NaN,
@@ -467,42 +467,67 @@ export default {
     },
     getDate(x){
       var date = new Date(x * 1000);
-      return moment(date).format();//.format("YYYY-DD-MM HH:MM:SS")
+      return moment(date).format("YYYY-DD-MM");//.format("YYYY-DD-MM HH:MM:SS")
     },
     mydiff(date1,date2,interval) {
-    var second=1000, minute=second*60, hour=minute*60, day=hour*24, week=day*7;
-    date1 = new Date();//new Date(date1);
-    date2 = new Date(date2);
-    var timediff = date2 - date1;
-    if (isNaN(timediff)) return NaN;
-    switch (interval) {
-        case "years": return date2.getFullYear() - date1.getFullYear();
-        case "months": return (
-            ( date2.getFullYear() * 12 + date2.getMonth() )
-            -
-            ( date1.getFullYear() * 12 + date1.getMonth() )
-        );
-        case "weeks"  : return Math.floor(timediff / week);
-        case "days"   : return Math.floor(timediff / day); 
-        case "hours"  : return Math.floor(timediff / hour); 
-        case "minutes": return Math.floor(timediff / minute);
-        case "seconds": return Math.floor(timediff / second);
-        default: return undefined;
-    }
+      var second=1000, minute=second*60, hour=minute*60, day=hour*24, week=day*7;
+      date1 = new Date();//new Date(date1);
+      date2 = new Date(date2);
+      var timediff = date2 - date1;
+      if (isNaN(timediff)) return NaN;
+      switch (interval) {
+          case "years": return date2.getFullYear() - date1.getFullYear();
+          case "months": return (
+              ( date2.getFullYear() * 12 + date2.getMonth() )
+              -
+              ( date1.getFullYear() * 12 + date1.getMonth() )
+          );
+          case "weeks"  : return Math.floor(timediff / week);
+          case "days"   : return Math.floor(timediff / day); 
+          case "hours"  : return Math.floor(timediff / hour); 
+          case "minutes": return Math.floor(timediff / minute);
+          case "seconds": return Math.floor(timediff / second);
+          default: return undefined;
+      }
+    },
+    dateDifference(endDate) {
+      const _MS_PER_DAY = 1000 * 60 * 60 * 24 + 1;
+      var startDate = new Date();
+      var splittedDate = endDate.split("-"); 
+      var strDate = [splittedDate[0], splittedDate[2], splittedDate[1]].join('/');
+      var dateObject = new Date(strDate);
+      // Discard the time and time-zone information.
+      const utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+      const utc2 = Date.UTC(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate());
+
+
+      return Math.floor((utc2 - utc1) / _MS_PER_DAY);
     },
     setDelegator(record, index){
-    var delegatoridx = index;
-    this.delegatorDelegatedNode = this.tableData[delegatoridx].nodeID;
-    this.delegatorBeneficiary = this.tableData[delegatoridx].rewardOwner.addresses[0];
-    this.delegatorStartTime = this.getDate(this.tableData[delegatoridx].startTime);
-    this.delegatorEndTime = this.getDate(this.tableData[delegatoridx].endTime);
-    this.delegatorDaysLeft = this.mydiff(this.delegatorStartTime,this.delegatorEndTime,"days") ; 
-    this.delegatorGrossRewards = this.tableData[delegatoridx].potentialReward/1000000000;
-    this.delegatorDelegationFees = - this.delegationsFee * this.delegatorGrossRewards / 100;
-    this.delegatorNetRewards = this.delegatorGrossRewards + this.delegatorDelegationFees;
-    this.delegatorStakeDelegated = this.tableData[delegatoridx].stakeAmount/1000000000;
-    this.delegatorNetYield = this.delegatorNetRewards/this.delegatorStakeDelegated * 100;
-    
+      var delegatoridx = index;
+      this.delegatorDelegatedNode = this.tableData[delegatoridx].nodeID;
+      this.delegatorBeneficiary = this.tableData[delegatoridx].rewardOwner.addresses[0];
+      // this.delegatorStartTime = this.getDate(this.tableData[delegatoridx].startTime);
+      this.delegatorStartTime = this.tableData[delegatoridx].startTime;
+      // this.delegatorEndTime = this.getDate(this.tableData[delegatoridx].endTime);
+      this.delegatorEndTime = this.tableData[delegatoridx].endTime;
+      //this.delegatorDaysLeft = this.mydiff(this.delegatorStartTime,this.delegatorEndTime,"days") ; 
+      try{ 
+        console.log("A111111111")
+        console.log(this.delegatorEndTime)
+        console.log("A222222222")
+        this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
+        } 
+      catch (error){ 
+        console.log(error)
+        }
+      //this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
+      this.delegatorGrossRewards = this.tableData[delegatoridx].potentialReward;
+      this.delegatorDelegationFees = - this.delegationsFee * this.delegatorGrossRewards / 100;
+      this.delegatorNetRewards = this.delegatorGrossRewards + this.delegatorDelegationFees;
+      this.delegatorStakeDelegated = this.tableData[delegatoridx].stakeAmount;
+      this.delegatorNetYield = this.delegatorNetRewards/this.delegatorStakeDelegated * 100;
+      
 
     },
     getIvanAPIPostData() {
@@ -556,7 +581,6 @@ export default {
       this.delegationsNetRewards = this.delegationsGrossReward  - this.potentialRewardFromDelegations;
       this.potentialRewardTotalRewards = this.potentialRewardFromDelegations + this.potentialRewardfromOwnedStake;
       this.stakeTotal = this.stakeOwned + this.delegationsDelegated;
-      this.timeLeft = parseInt((this.ivanapi_post_data.result.validators[0].endTime - this.ivanapi_post_data.result.validators[0].startTime)/86400);
       this.potentialRewardFromOwnedStakePct = this.potentialRewardfromOwnedStake / this.potentialRewardTotalRewards * 100;
       this.potentialRewardFromDelegationsPct = this.potentialRewardFromDelegations / this.potentialRewardTotalRewards * 100;
       this.NumberOfDelegators = Object.keys(this.ivanapi_post_data.result.validators[0].delegators).length;
@@ -568,11 +592,15 @@ export default {
       this.startTime = this.getDate(this.ivanapi_post_data.result.validators[0].startTime);
       this.endTime = this.getDate(this.ivanapi_post_data.result.validators[0].endTime);
       this.leftTimeDays = this.mydiff(this.startTime,this.endTime,"days");
-      //this.tableData = transformtableData();
+
       for (var i=0; i< this.tableData.length; i++){
-        this.tableData[i].stakeAmount = this.tableData[i].stakeAmount / 1000000000;
-        this.tableData[i].potentialReward = this.tableData[i].potentialReward / 1000000000;
-        //this.tableData[i].startTime = getDate(this.tableData[i].startTime) ;
+        this.tableData[i].stakeAmount = this.tableData[i].stakeAmount / 1000000000 ;//+ " " + this.cryptoSymbol;
+        this.tableData[i].potentialReward = this.tableData[i].potentialReward / 1000000000 ;//+ " " + this.cryptoSymbol;
+        // this.tableData[i].timeLeft = -1 *this.mydiff(parseInt(this.tableData[i].startTime) , parseInt(this.tableData[i].endTime),"days")/52.25;
+        //this.tableData[i].timeLeftDays = this.mydiff(+this.tableData[i].startTime , +this.tableData[i].endTime,"days");
+        this.tableData[i].startTime = this.getDate(this.tableData[i].startTime) ;
+        this.tableData[i].endTime = this.getDate(this.tableData[i].endTime) ;
+        
           }
 
       // Delegators Insight
