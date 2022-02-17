@@ -396,8 +396,10 @@ import Layout from "../components/dashboard/Layout.vue";
 //import axios from "axios";
 import moment from 'moment';
 
+
 export default {
   components: { Layout },
+  name : "my_validator",
   data() {
     return {
       ivanapi_post_data: [],
@@ -513,9 +515,6 @@ export default {
       this.delegatorEndTime = this.tableData[delegatoridx].endTime;
       //this.delegatorDaysLeft = this.mydiff(this.delegatorStartTime,this.delegatorEndTime,"days") ; 
       try{ 
-        console.log("A111111111")
-        console.log(this.delegatorEndTime)
-        console.log("A222222222")
         this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
         } 
       catch (error){ 
