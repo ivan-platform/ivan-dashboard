@@ -493,7 +493,7 @@ export default {
       }
     },
     dateDifference(endDate) {
-      const _MS_PER_DAY = 1000 * 60 * 60 * 24 + 1;
+      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
       var startDate = new Date();
       var splittedDate = endDate.split("-"); 
       var strDate = [splittedDate[0], splittedDate[2], splittedDate[1]].join('/');
@@ -584,8 +584,8 @@ export default {
       this.potentialRewardFromDelegationsPct = this.potentialRewardFromDelegations / this.potentialRewardTotalRewards * 100;
       this.NumberOfDelegators = Object.keys(this.ivanapi_post_data.result.validators[0].delegators).length;
       this.delegationsMaxYield = this.delegationsNetRewards / this.delegationsDelegated * 100;
-      this.delegationsFreeSpace = this.stakeOwned * 5;
-      this.delegationsMaxCapacity = this.delegationsFreeSpace + this.stakeTotal;
+      this.delegationsMaxCapacity = this.stakeOwned * 5;
+      this.delegationsFreeSpace = this.delegationsMaxCapacity - this.stakeTotal;
       this.delegationsCapacity = this.stakeTotal / this.delegationsMaxCapacity * 100;
       this.cryptoSymbol = "AVAX";
       this.startTime = this.getDate(this.ivanapi_post_data.result.validators[0].startTime);
