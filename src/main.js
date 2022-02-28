@@ -12,6 +12,8 @@ import HighchartsVue from 'highcharts-vue'
 import Highcharts from 'highcharts'
 import stockInit from 'highcharts/modules/stock'
 import exportingInit from "highcharts/modules/exporting";
+import store from './store/store';
+
 
 exportingInit(Highcharts)
 stockInit(Highcharts)
@@ -24,5 +26,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: (h) => h(App),
 }).$mount("#app");

@@ -47,7 +47,7 @@
                     <h1 class="center">SOLANA</h1>
                   </div>
                   <div class="widget-info">
-                    <h3 class="center">0 
+                    <h3 class="center"> {{ $store.state.count }}
                       <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:8px;">SOL</span>
                     </h3>
                   </div>
@@ -75,7 +75,9 @@
               </div>
 
               <div>
-                {{validator_data}}
+                <!-- <button class="btn" @click="getIvanAPIPostData">Add by Random Number</button> -->
+                <!-- {{$store.state.avalanche_data.api_data.ivanapi_post_data}} -->
+                <!-- {{ $store.state.avalanche_data.api_data.tableData }} -->
               </div>
              
             </div>
@@ -94,6 +96,7 @@ import Layout from "../../components/dashboard/Layout.vue";
 // import BtcChart from "../../components/dashboard/charts/BtcChart.vue";
 // import Toster from "../../components/dashboard/Toster.vue";
 //import Validator from "../../views/Validator.vue"
+// import { mapActions} from 'vuex';
 
 
 export default {
@@ -109,14 +112,19 @@ export default {
 
 
   },
-  validator_data : [require("../../views/Validator.vue")],
+ 
   data() {
     return {
       active: "all",
       avalancheTotal : 111.006,
     };
   },
+  mounted(){
+    this.$store.dispatch("getIvanAPIPostData");
+  },
   methods:{
+
+      // ...mapActions(['getIvanAPIPostData']),
 
       goToValidator(){
         this.$router.push({
