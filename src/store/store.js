@@ -1,86 +1,63 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import axios from 'axios';
+import moment from 'moment';
 
 
 Vue.use(Vuex)
 
 
-// function getStatus(x){
-//     if(x){return "ACTIVE";}
-//     else{return "INACTIVE";}
-// }
+function getStatus(x){
+    if(x){return "ACTIVE";}
+    else{return "INACTIVE";}
+}
 
 
-// function getDate(x){
-//     var date = new Date(x * 1000);
-//     return moment(date).format("YYYY-DD-MM");//.format("YYYY-DD-MM HH:MM:SS")
-// }
-
-// function mydiff(date1,date2,interval) {
-//     var second=1000, minute=second*60, hour=minute*60, day=hour*24, week=day*7;
-//     date1 = new Date();//new Date(date1);
-//     date2 = new Date(date2);
-//     var timediff = date2 - date1;
-//     if (isNaN(timediff)) return NaN;
-//     switch (interval) {
-//         case "years": return date2.getFullYear() - date1.getFullYear();
-//         case "months": return (
-//             ( date2.getFullYear() * 12 + date2.getMonth() )
-//             -
-//             ( date1.getFullYear() * 12 + date1.getMonth() )
-//         );
-//         case "weeks"  : return Math.floor(timediff / week);
-//         case "days"   : return Math.floor(timediff / day); 
-//         case "hours"  : return Math.floor(timediff / hour); 
-//         case "minutes": return Math.floor(timediff / minute);
-//         case "seconds": return Math.floor(timediff / second);
-//         default: return undefined;
-//     }
-// }
+function getDate(x){
+    var date = new Date(x * 1000);
+    return moment(date).format("YYYY-DD-MM");//.format("YYYY-DD-MM HH:MM:SS")
+}
 
 
-// function  dateDifference(endDate) {
-//     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-//     var startDate = new Date();
-//     var splittedDate = endDate.split("-"); 
-//     var strDate = [splittedDate[0], splittedDate[2], splittedDate[1]].join('/');
-//     var dateObject = new Date(strDate);
-//     // Discard the time and time-zone information.
-//     const utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-//     const utc2 = Date.UTC(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate());
+function  dateDifference(endDate) {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    var startDate = new Date();
+    var splittedDate = endDate.split("-"); 
+    var strDate = [splittedDate[0], splittedDate[2], splittedDate[1]].join('/');
+    var dateObject = new Date(strDate);
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+    const utc2 = Date.UTC(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate());
 
-
-//     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-// }
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
 
 // function setDelegator(record, index){
 //     var delegatoridx = index;
-//     this.delegatorDelegatedNode = this.tableData[delegatoridx].nodeID;
-//     this.delegatorBeneficiary = this.tableData[delegatoridx].rewardOwner.addresses[0];
-//     // this.delegatorStartTime = this.getDate(this.tableData[delegatoridx].startTime);
-//     this.delegatorStartTime = this.tableData[delegatoridx].startTime;
-//     // this.delegatorEndTime = this.getDate(this.tableData[delegatoridx].endTime);
-//     this.delegatorEndTime = this.tableData[delegatoridx].endTime;
-//     //this.delegatorDaysLeft = this.mydiff(this.delegatorStartTime,this.delegatorEndTime,"days") ; 
-//     try{ 
-//       this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
-//       } 
-//     catch (error){ 
-//       console.log(error)
-//       }
-//     //this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
-//     this.delegatorGrossRewards = this.tableData[delegatoridx].potentialReward;
-//     this.delegatorDelegationFees = - this.delegationsFee * this.delegatorGrossRewards / 100;
-//     this.delegatorNetRewards = this.delegatorGrossRewards + this.delegatorDelegationFees;
-//     this.delegatorStakeDelegated = this.tableData[delegatoridx].stakeAmount;
-//     this.delegatorNetYield = this.delegatorNetRewards/this.delegatorStakeDelegated * 100;
+//     // this.delegatorDelegatedNode = this.tableData[delegatoridx].nodeID;
+//     // this.delegatorBeneficiary = this.tableData[delegatoridx].rewardOwner.addresses[0];
+//     // // this.delegatorStartTime = this.getDate(this.tableData[delegatoridx].startTime);
+//     // this.delegatorStartTime = this.tableData[delegatoridx].startTime;
+//     // // this.delegatorEndTime = this.getDate(this.tableData[delegatoridx].endTime);
+//     // this.delegatorEndTime = this.tableData[delegatoridx].endTime;
+//     // //this.delegatorDaysLeft = this.mydiff(this.delegatorStartTime,this.delegatorEndTime,"days") ; 
+//     // try{ 
+//     //   this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
+//     //   } 
+//     // catch (error){ 
+//     //   console.log(error)
+//     //   }
+//     // //this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
+//     // this.delegatorGrossRewards = this.tableData[delegatoridx].potentialReward;
+//     // this.delegatorDelegationFees = - this.delegationsFee * this.delegatorGrossRewards / 100;
+//     // this.delegatorNetRewards = this.delegatorGrossRewards + this.delegatorDelegationFees;
+//     // this.delegatorStakeDelegated = this.tableData[delegatoridx].stakeAmount;
+//     // this.delegatorNetYield = this.delegatorNetRewards/this.delegatorStakeDelegated * 100;
 // }
 
 
 
 const state = {
-  count: 100,
+  count: 10,
   avalanche_data : {
     api_data : {
         // ivanapi_post_data : null,
@@ -139,8 +116,75 @@ const mutations = {
     setAvalancheData(state, data){
         state.avalanche_data.api_data.ivanapi_post_data = data;
         state.avalanche_data.api_data.tableData = data.result.validators[0].delegators;
+        state.avalanche_data.api_data.ivanStatus = getStatus(data.result.validators[0].connected);
+        state.avalanche_data.api_data.nodeID = data.result.validators[0].nodeID;
+        state.avalanche_data.api_data.beneficiaryAddress = data.result.validators[0].rewardOwner.addresses[0];
+        state.avalanche_data.api_data.stakeOwned = data.result.validators[0].stakeAmount / 1000000000;
+        state.avalanche_data.api_data.potentialRewardfromOwnedStake = data.result.validators[0].potentialReward / 1000000000;
+        state.avalanche_data.api_data.delegationsFee = +data.result.validators[0].delegationFee;
+                
+        state.avalanche_data.api_data.delegationsDelegated = data.result.validators[0].delegators
+                    .map(x => +x.stakeAmount) 
+                    .flat().reduce((e, f) => e + f) / 1000000000; 
+
+        state.avalanche_data.api_data.delegationsGrossReward = data.result.validators[0].delegators
+                  .map(x => +x.potentialReward) 
+                  .flat().reduce((e, f) => e + f) / 1000000000;
+        
+        state.avalanche_data.api_data.potentialRewardFromDelegations = state.avalanche_data.api_data.delegationsGrossReward
+                                                                         * state.avalanche_data.api_data.delegationsFee / 100;
+
+        state.avalanche_data.api_data.delegationsNetRewards = state.avalanche_data.api_data.delegationsGrossReward  
+                                                                - state.avalanche_data.api_data.potentialRewardFromDelegations;
+        
+        state.avalanche_data.api_data.potentialRewardTotalRewards = state.avalanche_data.api_data.potentialRewardFromDelegations 
+                                                                    + state.avalanche_data.api_data.potentialRewardfromOwnedStake;
+        
+        state.avalanche_data.api_data.stakeTotal = state.avalanche_data.api_data.stakeOwned 
+                                                    + state.avalanche_data.api_data.delegationsDelegated;
+        
+        state.avalanche_data.api_data.potentialRewardFromOwnedStakePct = state.avalanche_data.api_data.potentialRewardfromOwnedStake 
+                                                                            / state.avalanche_data.api_data.potentialRewardTotalRewards * 100;
+        
+        state.avalanche_data.api_data.potentialRewardFromDelegationsPct = state.avalanche_data.api_data.potentialRewardFromDelegations 
+                                                                            / state.avalanche_data.api_data.potentialRewardTotalRewards * 100;
+        
+        state.avalanche_data.api_data.NumberOfDelegators = Object.keys(state.avalanche_data.api_data.ivanapi_post_data.result.validators[0].delegators).length;
+
+        state.avalanche_data.api_data.delegationsMaxYield = state.avalanche_data.api_data.delegationsNetRewards / state.avalanche_data.api_data.delegationsDelegated * 100;
+        state.avalanche_data.api_data.delegationsMaxCapacity = state.avalanche_data.api_data.stakeOwned * 5;
+        state.avalanche_data.api_data.delegationsFreeSpace = state.avalanche_data.api_data.delegationsMaxCapacity - state.avalanche_data.api_data.stakeTotal;
+        state.avalanche_data.api_data.delegationsCapacity = state.avalanche_data.api_data.stakeTotal / state.avalanche_data.api_data.delegationsMaxCapacity * 100;
+        state.avalanche_data.api_data.cryptoSymbol = "AVAX";
+        state.avalanche_data.api_data.startTime = getDate(data.result.validators[0].startTime);
+        state.avalanche_data.api_data.endTime = getDate(data.result.validators[0].endTime);
+        state.avalanche_data.api_data.leftTimeDays = dateDifference(state.avalanche_data.api_data.endTime);
+
+        for (var i=0; i< state.avalanche_data.api_data.tableData.length; i++){
+            state.avalanche_data.api_data.tableData[i].stakeAmount = state.avalanche_data.api_data.tableData[i].stakeAmount / 1000000000 ;
+            state.avalanche_data.api_data.tableData[i].potentialReward = state.avalanche_data.api_data.tableData[i].potentialReward / 1000000000 ;
+            state.avalanche_data.api_data.tableData[i].startTime = getDate(state.avalanche_data.api_data.tableData[i].startTime) ;
+            state.avalanche_data.api_data.tableData[i].endTime = getDate(state.avalanche_data.api_data.tableData[i].endTime) ;
+            state.avalanche_data.api_data.tableData[i].timeLeftDays = dateDifference(state.avalanche_data.api_data.tableData[i].endTime);
+        }
+    },
+    setDelegator(state, record){
+        state.avalanche_data.api_data.delegatorDelegatedNode = record.nodeID;
+        state.avalanche_data.api_data.delegatorBeneficiary = record.rewardOwner.addresses[0];
+        state.avalanche_data.api_data.delegatorStartTime = record.startTime;
+        state.avalanche_data.api_data.delegatorEndTime = record.endTime;
+        try{ 
+            state.avalanche_data.api_data.delegatorDaysLeft = dateDifference(state.avalanche_data.api_data.delegatorEndTime) ; 
+          } 
+        catch (error){ 
+          console.log(error)
+          }
+        state.avalanche_data.api_data.delegatorGrossRewards = record.potentialReward;
+        state.avalanche_data.api_data.delegatorDelegationFees = - state.avalanche_data.api_data.delegationsFee * state.avalanche_data.api_data.delegatorGrossRewards / 100;
+        state.avalanche_data.api_data.delegatorNetRewards = state.avalanche_data.api_data.delegatorGrossRewards + state.avalanche_data.api_data.delegatorDelegationFees;
+        state.avalanche_data.api_data.delegatorStakeDelegated = record.stakeAmount;
+        state.avalanche_data.api_data.delegatorNetYield = state.avalanche_data.api_data.delegatorNetRewards/state.avalanche_data.api_data.delegatorStakeDelegated * 100;
     }
-    
 }
 
 
@@ -160,75 +204,18 @@ const actions = {
                     "id": 1
                 })
                 };
-            
             fetch('http://ec2-18-190-173-22.us-east-2.compute.amazonaws.com:9650/ext/P', requestOptions)
             .then(async response => {
             const data = await response.json();
-
             // check for error response
             if (!response.ok) {
                 // get error message from body or default to response status
                 const error = (data && data.message) || response.status;
                 return Promise.reject(error);
             }
-            
-            // console.log(data.result);
-            // console.log(JSON.parse(data).result);
-            // this.ivanapi_post_data = data;
-            // console.log(JSON.parse(data).result);
-            context.commit("setAvalancheData", data);
-            
-            //   // console.log(this.ivanapi_post_data.result.validators[0].delegators)
-            //   this.tableData = this.ivanapi_post_data.result.validators[0].delegators;
-
-            //   // console.log(this.tableData)
-            //   this.ivanStatus = this.getStatus(this.ivanapi_post_data.result.validators[0].connected);
-            //   // console.log(this.ivanStatus)
-            //   this.nodeID = this.ivanapi_post_data.result.validators[0].nodeID
-            //   this.beneficiaryAddress = this.ivanapi_post_data.result.validators[0].rewardOwner.addresses[0]
-            //   this.stakeOwned = this.ivanapi_post_data.result.validators[0].stakeAmount / 1000000000;
-            //   this.potentialRewardfromOwnedStake = this.ivanapi_post_data.result.validators[0].potentialReward / 1000000000;
-            //   this.delegationsFee = +this.ivanapi_post_data.result.validators[0].delegationFee;
-            //   this.delegationsDelegated= this.ivanapi_post_data.result.validators[0].delegators
-            //       .map(x => +x.stakeAmount) 
-            //       .flat().reduce((e, f) => e + f) / 1000000000; 
-            
-            //   this.delegationsGrossReward= this.ivanapi_post_data.result.validators[0].delegators
-            //       .map(x => +x.potentialReward) 
-            //       .flat().reduce((e, f) => e + f) / 1000000000; 
-
-            //   this.potentialRewardFromDelegations = this.delegationsGrossReward * this.delegationsFee / 100;
-            //   this.delegationsNetRewards = this.delegationsGrossReward  - this.potentialRewardFromDelegations;
-            //   this.potentialRewardTotalRewards = this.potentialRewardFromDelegations + this.potentialRewardfromOwnedStake;
-            //   this.stakeTotal = this.stakeOwned + this.delegationsDelegated;
-            //   this.potentialRewardFromOwnedStakePct = this.potentialRewardfromOwnedStake / this.potentialRewardTotalRewards * 100;
-            //   this.potentialRewardFromDelegationsPct = this.potentialRewardFromDelegations / this.potentialRewardTotalRewards * 100;
-            //   this.NumberOfDelegators = Object.keys(this.ivanapi_post_data.result.validators[0].delegators).length;
-            //   this.delegationsMaxYield = this.delegationsNetRewards / this.delegationsDelegated * 100;
-            //   this.delegationsMaxCapacity = this.stakeOwned * 5;
-            //   this.delegationsFreeSpace = this.delegationsMaxCapacity - this.stakeTotal;
-            //   this.delegationsCapacity = this.stakeTotal / this.delegationsMaxCapacity * 100;
-            //   this.cryptoSymbol = "AVAX";
-            //   this.startTime = this.getDate(this.ivanapi_post_data.result.validators[0].startTime);
-            //   this.endTime = this.getDate(this.ivanapi_post_data.result.validators[0].endTime);
-            //   //this.leftTimeDays = this.mydiff(this.startTime,this.endTime,"days");
-            //   this.leftTimeDays = this.dateDifference(this.endTime);
-
-            //   for (var i=0; i< this.tableData.length; i++){
-            //     this.tableData[i].stakeAmount = this.tableData[i].stakeAmount / 1000000000 ;//+ " " + this.cryptoSymbol;
-            //     this.tableData[i].potentialReward = this.tableData[i].potentialReward / 1000000000 ;//+ " " + this.cryptoSymbol;
-            //     // this.tableData[i].timeLeft = -1 *this.mydiff(parseInt(this.tableData[i].startTime) , parseInt(this.tableData[i].endTime),"days")/52.25;
-            //     this.tableData[i].startTime = this.getDate(this.tableData[i].startTime) ;
-            //     this.tableData[i].endTime = this.getDate(this.tableData[i].endTime) ;
-            //     this.tableData[i].timeLeftDays = this.dateDifference(this.tableData[i].endTime);
-                
-            //       }
-
-            //   // Delegators Insight
-            //   this.setDelegator(0,0)
-            
-                })
-                .catch(error => {
+            context.commit("setAvalancheData", data);            
+            })
+            .catch(error => {
             this.errorMessage = error;
             console.error('There was an error!', error);
             });

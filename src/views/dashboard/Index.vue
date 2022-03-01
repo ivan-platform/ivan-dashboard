@@ -25,7 +25,7 @@
                   <div class="widget-info">
                     
                     <!-- <Validator @getavalanchetotal="getavalanchestakeTotal">{{avalancheTotal}}</Validator> -->
-                    <h3 class="center">{{avalancheTotal}} 
+                    <h3 class="center">{{ $store.state.avalanche_data.api_data.stakeTotal }}
                       <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:8px;">AVAX</span>
                     </h3>
                   </div>
@@ -47,7 +47,7 @@
                     <h1 class="center">SOLANA</h1>
                   </div>
                   <div class="widget-info">
-                    <h3 class="center"> {{ $store.state.count }}
+                    <h3 class="center"> 0
                       <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:8px;">SOL</span>
                     </h3>
                   </div>
@@ -116,30 +116,18 @@ export default {
   data() {
     return {
       active: "all",
-      avalancheTotal : 111.006,
     };
   },
   mounted(){
     this.$store.dispatch("getIvanAPIPostData");
   },
   methods:{
-
-      // ...mapActions(['getIvanAPIPostData']),
-
-      goToValidator(){
-        this.$router.push({
-          name: "Validator",
-          parames :{}
-          });
-      },
-
-      getavalanchestakeTotal(data){
-      this.avalancheTotal = 0;
-      console.log("aaaaaaaaaaaa")
-      console.log(data)
-      console.log("bbbbbbbbb")
-      this.avalancheTotal = data;
-  },
+    goToValidator(){
+      this.$router.push({
+        name: "Validator",
+        parames :{}
+        });
+    }
 
   },
 };
