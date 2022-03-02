@@ -11,7 +11,7 @@
               </div> -->
 
 
-              <div class="col-xl-4 col-lg-6 col-md-6">
+              <div class="col-xl-3 col-lg-6 col-md-6">
                 <div class="widget-card">
                   <div class="widget-title">
                     <div>
@@ -25,8 +25,31 @@
                   <div class="widget-info">
                     
                     <!-- <Validator @getavalanchetotal="getavalanchestakeTotal">{{avalancheTotal}}</Validator> -->
-                    <h3 class="center">{{ $store.state.avalanche_data.api_data.stakeTotal }}
-                      <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:8px;">AVAX</span>
+                    <h3 class="center">{{ $store.state.avalanche_data.api_data.stakeTotal.toFixed(2) }}
+                      <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:15px;padding-left:5px;padding-right:5px;">AVAX</span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="col-xl-3 col-lg-6 col-md-6">
+                <div class="widget-card">
+                  <div class="widget-title">
+                    <div>
+                      <img src="../../assets/images/ethereum-avax-logo.svg"
+                           alt="avalanche logo"  class="center" @click="goToValidator()">
+                    </div>
+                  </div>
+                  <div>
+                    <h1 class="center">ETHEREUM</h1>
+                  </div>
+                  <div class="widget-info">
+                    
+                    <!-- <Validator @getavalanchetotal="getavalanchestakeTotal">{{avalancheTotal}}</Validator> -->
+                    <h3 class="center">0
+                      <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:15px;padding-left:5px;padding-right:5px;">ETH</span>
                     </h3>
                   </div>
                 </div>
@@ -35,7 +58,7 @@
 
 
 
-              <div class="col-xl-4 col-lg-6 col-md-6">
+              <div class="col-xl-3 col-lg-6 col-md-6">
                 <div class="widget-card">
                   <div class="widget-title">
                     <div>
@@ -48,14 +71,14 @@
                   </div>
                   <div class="widget-info">
                     <h3 class="center"> 0
-                      <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:8px;">SOL</span>
+                      <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:15px;padding-left:5px;padding-right:5px;">SOL</span>
                     </h3>
                   </div>
                 </div>
               </div>
 
 
-              <div class="col-xl-4 col-lg-6 col-md-6">
+              <div class="col-xl-3 col-lg-6 col-md-6">
                 <div class="widget-card">
                   <div class="widget-title">
                     <div>
@@ -68,7 +91,7 @@
                   </div>
                   <div class="widget-info">
                     <h3 class="center">0 
-                      <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:8px;">LINK</span>
+                      <span style="color:white;background-color:rgba(109, 109, 242,1);font-size:25px;font-weight:100;border-radius:15px;padding-left:5px;padding-right:5px;">LINK</span>
                     </h3>
                   </div>
                 </div>

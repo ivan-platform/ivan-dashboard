@@ -2,7 +2,7 @@
   <div class="sidebar">
     <router-link class="brand-logo" to="/vuehome">
       <center>
-        <img src="../../assets/images/logo.png" alt="" />
+        <img src="../../assets/images/logo.png" alt=""/>
         <br>
         <span>Ivan-Stake Dashboard </span>
       </center>  

@@ -31,28 +31,20 @@ function  dateDifference(endDate) {
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 
-// function setDelegator(record, index){
-//     var delegatoridx = index;
-//     // this.delegatorDelegatedNode = this.tableData[delegatoridx].nodeID;
-//     // this.delegatorBeneficiary = this.tableData[delegatoridx].rewardOwner.addresses[0];
-//     // // this.delegatorStartTime = this.getDate(this.tableData[delegatoridx].startTime);
-//     // this.delegatorStartTime = this.tableData[delegatoridx].startTime;
-//     // // this.delegatorEndTime = this.getDate(this.tableData[delegatoridx].endTime);
-//     // this.delegatorEndTime = this.tableData[delegatoridx].endTime;
-//     // //this.delegatorDaysLeft = this.mydiff(this.delegatorStartTime,this.delegatorEndTime,"days") ; 
-//     // try{ 
-//     //   this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
-//     //   } 
-//     // catch (error){ 
-//     //   console.log(error)
-//     //   }
-//     // //this.delegatorDaysLeft = this.dateDifference(this.delegatorEndTime) ; 
-//     // this.delegatorGrossRewards = this.tableData[delegatoridx].potentialReward;
-//     // this.delegatorDelegationFees = - this.delegationsFee * this.delegatorGrossRewards / 100;
-//     // this.delegatorNetRewards = this.delegatorGrossRewards + this.delegatorDelegationFees;
-//     // this.delegatorStakeDelegated = this.tableData[delegatoridx].stakeAmount;
-//     // this.delegatorNetYield = this.delegatorNetRewards/this.delegatorStakeDelegated * 100;
-// }
+function daysApart(startDate,endDate) {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    var splittedstartDate = startDate.split("-"); 
+    var strstartDate = [splittedstartDate[0], splittedstartDate[2], splittedstartDate[1]].join('/');
+    var startdateObject = new Date(strstartDate);
+    var splittedendDate = endDate.split("-"); 
+    var strendDate = [splittedendDate[0], splittedendDate[2], splittedendDate[1]].join('/');
+    var enddateObject = new Date(strendDate);
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(startdateObject.getFullYear(), startdateObject.getMonth(), startdateObject.getDate());
+    const utc2 = Date.UTC(enddateObject.getFullYear(), enddateObject.getMonth(), enddateObject.getDate());
+
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
 
 
 
@@ -62,7 +54,7 @@ const state = {
     api_data : {
         // ivanapi_post_data : null,
         ivanapi_post_data: [],
-        fields: ['txID',{'stakeAmount':'Delegated'}, 'potentialReward' ,{'startTime':'Started On'},{'endTime': 'Ends On'}, {'timeLeftDays': 'Days Left'}],
+        fields: [{'rewardOwner.addresses[0]' : 'BENEFICIARY'},{'stakeAmount':'Delegated'}, 'potentialReward' ,{'startTime':'Started On'},{'endTime': 'Ends On'}, {'timeLeftDays': 'Days Left'}],
         tableData: [],
         totalRows: 100,
         currentPage: 1,
@@ -77,6 +69,7 @@ const state = {
         beneficiaryAddress : NaN,
         // TIME LEFT
         leftTimeDays : NaN,
+        totalTimeDays: NaN,
         // STAKE
         stakeOwned : NaN,
         stakeTotal : NaN,
@@ -159,6 +152,7 @@ const mutations = {
         state.avalanche_data.api_data.startTime = getDate(data.result.validators[0].startTime);
         state.avalanche_data.api_data.endTime = getDate(data.result.validators[0].endTime);
         state.avalanche_data.api_data.leftTimeDays = dateDifference(state.avalanche_data.api_data.endTime);
+        state.avalanche_data.api_data.totalTimeDays = daysApart(state.avalanche_data.api_data.startTime, state.avalanche_data.api_data.endTime);        
 
         for (var i=0; i< state.avalanche_data.api_data.tableData.length; i++){
             state.avalanche_data.api_data.tableData[i].stakeAmount = state.avalanche_data.api_data.tableData[i].stakeAmount / 1000000000 ;
