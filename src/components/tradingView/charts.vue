@@ -6,7 +6,7 @@
       width: 'auto',
       height: 800,
       interval: 'D',
-      timezone: 'Etc/UTC',
+      timezone: 'America/New_York',
       style: 1,
       locale: 'en',
       toolbar_bg: '#f1f3f6',
