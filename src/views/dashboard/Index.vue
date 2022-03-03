@@ -107,6 +107,11 @@
           </div>
         </div>
       </div>
+
+      <br><br>
+      <TradingViewCharts></TradingViewCharts>
+      <br><br>
+
     </div>
   </layout>
 </template>
@@ -120,6 +125,7 @@ import Layout from "../../components/dashboard/Layout.vue";
 // import Toster from "../../components/dashboard/Toster.vue";
 //import Validator from "../../views/Validator.vue"
 // import { mapActions} from 'vuex';
+import TradingViewCharts from '../../components/tradingView/charts.vue';
 
 
 export default {
@@ -132,6 +138,7 @@ export default {
     // BtcChart,
     // Toster,
     //Validator,
+    TradingViewCharts,
 
 
   },
