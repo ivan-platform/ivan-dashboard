@@ -100,7 +100,11 @@ const state = {
         delegatorNetRewards : NaN,
         delegatorNetYield : NaN,
         delegatorStakeDelegated : NaN,
+    },
+    validators_tab_show:{
+        validatorDivShow : 'Avalanche',
     }
+
   }
 }
 
@@ -178,6 +182,9 @@ const mutations = {
         state.avalanche_data.api_data.delegatorNetRewards = state.avalanche_data.api_data.delegatorGrossRewards + state.avalanche_data.api_data.delegatorDelegationFees;
         state.avalanche_data.api_data.delegatorStakeDelegated = record.stakeAmount;
         state.avalanche_data.api_data.delegatorNetYield = state.avalanche_data.api_data.delegatorNetRewards/state.avalanche_data.api_data.delegatorStakeDelegated * 100;
+    },
+    setValidatorShow(state, arg){
+        state.avalanche_data.validators_tab_show.validatorDivShow = arg;
     }
 }
 

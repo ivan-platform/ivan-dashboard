@@ -1,6 +1,6 @@
 <template>
   <layout :active="1" :title="true">
-    <!-- <toster /> -->
+    
     <div class="content-body">
       <div>
         <div class="row">
@@ -16,7 +16,7 @@
                   <div class="widget-title">
                     <div>
                       <img src="../../assets/images/avalanche-avax-logo.png"
-                           alt="avalanche logo"  class="center" @click="goToValidator()">
+                           class="center" @click="goToValidator('Avalanche')">
                     </div>
                   </div>
                   <div>
@@ -39,7 +39,7 @@
                   <div class="widget-title">
                     <div>
                       <img src="../../assets/images/ethereum-avax-logo.svg"
-                           alt="avalanche logo"  class="center" @click="goToValidator()">
+                           class="center" @click="goToValidator('Ethereum')">
                     </div>
                   </div>
                   <div>
@@ -63,7 +63,7 @@
                   <div class="widget-title">
                     <div>
                       <img src="../../assets/images/Solana_logo.jpeg"
-                           alt="avalanche logo" class="center" @click="goToValidator()">
+                           class="center" @click="goToValidator('Solana')">
                     </div>
                   </div>
                   <div>
@@ -83,7 +83,7 @@
                   <div class="widget-title">
                     <div>
                       <img src="../../assets/images/chainlink-logo.png"
-                           alt="avalanche logo" class="center" @click="goToValidator()">
+                           class="center" @click="goToValidator('Chainlink')">
                     </div>
                   </div>
                   <div>
@@ -113,6 +113,8 @@
       <br><br>
 
     </div>
+
+
   </layout>
 </template>
 
@@ -126,7 +128,7 @@ import Layout from "../../components/dashboard/Layout.vue";
 //import Validator from "../../views/Validator.vue"
 // import { mapActions} from 'vuex';
 import TradingViewCharts from '../../components/tradingView/charts.vue';
-
+import {mapMutations} from 'vuex';
 
 export default {
   name: "Index",
@@ -139,7 +141,7 @@ export default {
     // Toster,
     //Validator,
     TradingViewCharts,
-
+  
 
   },
  
@@ -152,7 +154,9 @@ export default {
     this.$store.dispatch("getIvanAPIPostData");
   },
   methods:{
-    goToValidator(){
+    ...mapMutations(['setValidatorShow']),
+    goToValidator(arg){
+      this.setValidatorShow(arg);
       this.$router.push({
         name: "Validator",
         parames :{}
